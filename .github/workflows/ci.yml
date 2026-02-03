@@ -1,4 +1,4 @@
-name: CI demo
+name: CI with artifacts
 
 on:
   push:
@@ -7,6 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Say hello
-        run: echo "Hello from CI"
+      - name: Create build output
+        run: |
+          mkdir output
+          echo "Build result" > output/result.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: output/
