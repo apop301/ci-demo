@@ -9,13 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create build output
-        run: |
-          mkdir output
-          echo "Build result" > output/result.txt
+      - name: Use secret
+        run: 
+          echo "Secret is $MY_SECRET"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}   
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: output/
